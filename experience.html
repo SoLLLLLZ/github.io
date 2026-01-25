@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thomas Zhao - Professional Experience, Skills, and Achievements">
+    <title>Thomas Zhao | Experience</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0f;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Cyberpunk Background */
+        .cyberpunk-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            background-image: url('edited-photo.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .cyberpunk-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 15, 0.85);
+            z-index: 1;
+        }
+
+        /* Grid Background */
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 1;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(40px); }
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* Side Navigation Panel */
+        .side-nav {
+            width: 280px;
+            background: rgba(17, 17, 22, 0.95);
+            border-right: 2px solid rgba(0, 255, 255, 0.3);
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+            transition: transform 0.3s ease, width 0.3s ease;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            z-index: 100;
+            overflow-y: auto;
+        }
+
+        .side-nav.collapsed {
+            width: 80px;
+        }
+
+        .side-nav.collapsed .nav-text {
+            opacity: 0;
+            width: 0;
+        }
+
+        .side-nav.collapsed .toggle-btn svg {
+            transform: rotate(180deg);
+        }
+
+        /* Scrollbar styling for sidebar */
+        .side-nav::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .side-nav::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .side-nav::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+
+        .side-nav::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 255, 255, 0.5);
+        }
+
+        /* Toggle Button */
+        .toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: -15px;
+            width: 30px;
+            height: 30px;
+            background: rgba(17, 17, 22, 0.95);
+            border: 2px solid #0ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .toggle-btn:hover {
+            background: rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+        }
+
+        .toggle-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: #0ff;
+            transition: transform 0.3s ease;
+        }
+
+        /* Nav Tab */
+        .nav-tab {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 18px 25px;
+            background: rgba(22, 22, 31, 0.8);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #888;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-tab:hover::before {
+            left: 100%;
+        }
+
+        .nav-tab:hover {
+            border-color: #0ff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            transform: translateX(5px);
+        }
+
+        .nav-tab.active {
+            border-color: #0ff;
+            background: rgba(0, 255, 255, 0.15);
+            color: #0ff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .nav-tab.active .nav-icon {
+            background: linear-gradient(135deg, #0ff, #f0f);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+        }
+
+        /* Nav Icon */
+        .nav-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .nav-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .nav-text {
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transition: opacity 0.3s ease, width 0.3s ease;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            padding: 60px 80px;
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+            margin-left: 280px;
+            transition: margin-left 0.3s ease;
+        }
+
+        body.sidebar-collapsed .main-content {
+            margin-left: 80px;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: 60px;
+        }
+
+        .page-title {
+            font-size: 64px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #0ff, #f0f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            animation: glowText 2s ease-in-out infinite;
+        }
+
+        @keyframes glowText {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: #888;
+            letter-spacing: 2px;
+        }
+
+        .title-line {
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, #0ff, transparent);
+            margin-top: 15px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: rgba(22, 22, 31, 0.8);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #0ff, #f0f);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .content-section:hover {
+            border-color: #0ff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid rgba(0, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: #0ff;
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: #0ff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        /* Experience Cards */
+        .experience-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #0ff, transparent);
+        }
+
+        .experience-card:hover {
+            border-color: #0ff;
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .experience-left {
+            flex: 1;
+        }
+
+        .company-name {
+            font-size: 24px;
+            color: #0ff;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .position-title {
+            font-size: 18px;
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .location {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .experience-right {
+            text-align: right;
+        }
+
+        .date-range {
+            font-size: 14px;
+            color: #0ff;
+            background: rgba(0, 255, 255, 0.1);
+            padding: 5px 15px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .experience-description {
+            margin-top: 15px;
+        }
+
+        .experience-description ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .experience-description li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .experience-description li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #0ff;
+            font-size: 18px;
+        }
+
+        /* Skills Section */
+        #skills-section {
+            border-color: rgba(255, 0, 255, 0.4);
+        }
+
+        #skills-section::before {
+            background: linear-gradient(to bottom, #f0f, #ff0099);
+        }
+
+        #skills-section .section-icon {
+            border-color: rgba(255, 0, 255, 0.5);
+            background: rgba(255, 0, 255, 0.1);
+        }
+
+        #skills-section .section-icon svg {
+            fill: #f0f;
+        }
+
+        #skills-section .section-title {
+            color: #f0f;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-category {
+            margin-bottom: 30px;
+        }
+
+        .category-title {
+            font-size: 20px;
+            color: #f0f;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: rgba(255, 0, 255, 0.1);
+            border: 2px solid rgba(255, 0, 255, 0.3);
+            border-radius: 20px;
+            padding: 8px 20px;
+            margin: 5px;
+            transition: all 0.3s ease;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .skill-tag:hover {
+            border-color: #f0f;
+            background: rgba(255, 0, 255, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+        }
+
+        /* Achievements Section */
+        #achievements-section {
+            border-color: rgba(0, 255, 170, 0.4);
+        }
+
+        #achievements-section::before {
+            background: linear-gradient(to bottom, #0fa, #00ff88);
+        }
+
+        #achievements-section .section-icon {
+            border-color: rgba(0, 255, 170, 0.5);
+            background: rgba(0, 255, 170, 0.1);
+        }
+
+        #achievements-section .section-icon svg {
+            fill: #0fa;
+        }
+
+        #achievements-section .section-title {
+            color: #0fa;
+        }
+
+        .achievement-card {
+            background: rgba(0, 255, 170, 0.05);
+            border-left: 4px solid #0fa;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            background: rgba(0, 255, 170, 0.1);
+            transform: translateX(10px);
+            box-shadow: 0 0 20px rgba(0, 255, 170, 0.3);
+        }
+
+        .achievement-title {
+            color: #0fa;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .achievement-description {
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Scanlines Effect */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 255, 255, 0) 50%,
+                rgba(0, 255, 255, 0.02) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.3;
+        }
+
+        /* Corner Decorations */
+        .corner-decoration {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(0, 255, 255, 0.5);
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .corner-decoration.top-left {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-decoration.top-right {
+            top: 20px;
+            right: 20px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-decoration.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-decoration.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* Glitch Effects */
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .glitch-overlay.active {
+            animation: glitchAnimation 0.3s steps(2, end);
+        }
+
+        @keyframes glitchAnimation {
+            0% {
+                opacity: 0;
+                transform: translate(0);
+            }
+            20% {
+                opacity: 1;
+                transform: translate(-5px, 5px);
+                background: rgba(255, 0, 0, 0.1);
+            }
+            40% {
+                opacity: 1;
+                transform: translate(5px, -5px);
+                background: rgba(0, 255, 255, 0.1);
+            }
+            60% {
+                opacity: 1;
+                transform: translate(-5px, -5px);
+                background: rgba(255, 0, 255, 0.1);
+            }
+            80% {
+                opacity: 1;
+                transform: translate(5px, 5px);
+                background: rgba(0, 255, 0, 0.1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-content {
+                padding: 40px 40px;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .side-nav {
+                transform: translateX(-100%);
+            }
+
+            .side-nav.mobile-open {
+                transform: translateX(0);
+            }
+            
+            .side-nav.collapsed {
+                transform: translateX(-100%);
+            }
+
+            .toggle-btn {
+                left: 100%;
+                right: auto;
+            }
+
+            .main-content {
+                padding: 40px 20px;
+                margin-left: 0 !important;
+            }
+
+            .page-title {
+                font-size: 42px;
+            }
+
+            .experience-header {
+                flex-direction: column;
+            }
+
+            .experience-right {
+                text-align: left;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body data-current-page="experience">
+    <!-- Cyberpunk Background -->
+    <div class="cyberpunk-background"></div>
+
+    <!-- Grid Background -->
+    <div class="grid-background"></div>
+
+    <!-- Scanlines Effect -->
+    <div class="scanlines"></div>
+
+    <!-- Glitch Effects -->
+    <div class="glitch-overlay" id="glitchOverlay"></div>
+
+    <!-- Corner Decorations -->
+    <div class="corner-decoration top-left"></div>
+    <div class="corner-decoration top-right"></div>
+    <div class="corner-decoration bottom-left"></div>
+    <div class="corner-decoration bottom-right"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Side Navigation -->
+        <nav class="side-nav" id="sideNav">
+            <!-- Toggle Button -->
+            <div class="toggle-btn" id="toggleBtn">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+            </div>
+
+            <a href="index.html" class="nav-tab" data-page="home">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                </div>
+                <span class="nav-text">Home</span>
+            </a>
+
+            <a href="about.html" class="nav-tab" data-page="about">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <span class="nav-text">About Me</span>
+            </a>
+
+            <a href="education.html" class="nav-tab" data-page="education">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                    </svg>
+                </div>
+                <span class="nav-text">Education</span>
+            </a>
+
+            <a href="experience.html" class="nav-tab active" data-page="experience">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+                    </svg>
+                </div>
+                <span class="nav-text">Experience</span>
+            </a>
+
+            <a href="projects.html" class="nav-tab" data-page="projects">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                    </svg>
+                </div>
+                <span class="nav-text">Projects</span>
+            </a>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <header class="page-header">
+                <h1 class="page-title">Experience</h1>
+                <p class="page-subtitle">&gt; PROFESSIONAL_PROFILE.exe</p>
+                <div class="title-line"></div>
+            </header>
+
+            <!-- Work Experience Section -->
+            <section class="content-section" id="experience-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+                        </svg>
+                    </div>
+                    <h2 class="section-title">&gt; Work Experience</h2>
+                </div>
+                <div class="section-content">
+                    <!-- Traders at CMU -->
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div class="experience-left">
+                                <div class="company-name">Traders at CMU</div>
+                                <div class="position-title">Quantitative Trading Analyst</div>
+                                <div class="location">Pittsburgh, PA</div>
+                            </div>
+                            <div class="experience-right">
+                                <div class="date-range">Aug 2025 - Present</div>
+                            </div>
+                        </div>
+                        <div class="experience-description">
+                            <ul>
+                                <li>Analyzed $1M+ daily volume across Kalshi sports markets, identifying regime-dependent patterns (momentum in NBA vs mean reversion in NFL) using a WebSocket pipeline capturing live order book data into SQL</li>
+                                <li>Backtested cross-market dynamics between crude oil futures and geopolitical prediction markets, identifying a 0.72 correlation where large intraday moves (>3%) preceded geopolitical risk repricing on prediction markets</li>
+                                <li>Automated 90% of trade execution by building a sandbox environment supporting multiple strategies, with conditional order routing, script-based scanners, and customizable API polling across 500+ markets</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Introductory Finance Society -->
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div class="experience-left">
+                                <div class="company-name">Introductory Finance Society</div>
+                                <div class="position-title">Board Member and Equity Research Analyst</div>
+                                <div class="location">Pittsburgh, PA</div>
+                            </div>
+                            <div class="experience-right">
+                                <div class="date-range">Jan 2025 - Present</div>
+                            </div>
+                        </div>
+                        <div class="experience-description">
+                            <ul>
+                                <li>Led weekly teach-ins for 30+ students on key market dynamics across fixed income and derivatives including yield curve structure, duration/convexity risk, credit spread, options Greeks, and interest rate products</li>
+                                <li>Pitched multiple trading strategies including 2s/10s Treasury steepener, Bunds/OATS spread, and USD/CNY FX pair, showcasing expertise in interest rate movements, international bond markets, and currency dynamics</li>
+                                <li>Created investment memos and pitch decks on $RIVN, $HIMS, and $LNTH using DCF, comparable company, and sensitivity analyses, with growth driver assessments and risk modeling; $RIVN long thesis up 40% since pitch</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Business Technology Group -->
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div class="experience-left">
+                                <div class="company-name">Business Technology Group</div>
+                                <div class="position-title">Head of Finance and Data Analyst</div>
+                                <div class="location">Pittsburgh, PA</div>
+                            </div>
+                            <div class="experience-right">
+                                <div class="date-range">Sep 2024 - Present</div>
+                            </div>
+                        </div>
+                        <div class="experience-description">
+                            <ul>
+                                <li>Developed OpenGym, a web app that delivers real-time occupancy data of the CMU gym for 1000+ users</li>
+                                <li>Predicted gym occupancy with 80%+ accuracy by building machine learning models (ARIMA, Random Forest) using Python, trained on 50,000+ historical data points incorporating seasonality and academic calendar</li>
+                                <li>Managed an annual budget of $10,000+, oversaw funding allocation, reimbursements, and club events</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Language Acquisition, Processing, and Pedagogy Lab -->
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div class="experience-left">
+                                <div class="company-name">Language Acquisition, Processing, and Pedagogy Lab</div>
+                                <div class="position-title">Quantitative Linguistics Research Assistant</div>
+                                <div class="location">Pittsburgh, PA</div>
+                            </div>
+                            <div class="experience-right">
+                                <div class="date-range">May 2025 - Present</div>
+                            </div>
+                        </div>
+                        <div class="experience-description">
+                            <ul>
+                                <li>Collaborated with Dr. Seth Wiener and 2 PhD students to design Visual World Paradigm experiments</li>
+                                <li>Co-authored research paper submitted to Speech Prosody 2026 investigating real-time sarcasm processing using eye-tracking; designed 100+ participant study, analyzed acoustic features (F0, HNR) with GLMM regression models in R achieving significant predictive power (R² = .44) for gaze behavior</li>
+                                <li>Built end-to-end data pipeline processing 100,000+ rows of eye-tracking data, handled data preprocessing, outlier detection (2.5 SD threshold), and time-series aggregation using Python and R</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- CMU 15-112 -->
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div class="experience-left">
+                                <div class="company-name">CMU 15-112</div>
+                                <div class="position-title">Teaching Assistant</div>
+                                <div class="location">Pittsburgh, PA</div>
+                            </div>
+                            <div class="experience-right">
+                                <div class="date-range">Aug 2025 - Present</div>
+                            </div>
+                        </div>
+                        <div class="experience-description">
+                            <ul>
+                                <li>Taught Python and algorithmic problem solving to 200+ students via recitations, prep groups, and office hours</li>
+                                <li>Covered topics of OOP, recursive programming, backtracking, computer graphics, data analysis, sorting algorithms, search techniques, graph traversal, and time complexity analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section class="content-section" id="skills-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                        </svg>
+                    </div>
+                    <h2 class="section-title">&gt; Technical Skills</h2>
+                </div>
+                <div class="section-content">
+                    <div class="skill-category">
+                        <div class="category-title">Programming Languages</div>
+                        <div class="skills-grid">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">C</span>
+                            <span class="skill-tag">R</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">HTML</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="category-title">Technical Skills</div>
+                        <div class="skills-grid">
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">ARIMA Models</span>
+                            <span class="skill-tag">Random Forest</span>
+                            <span class="skill-tag">GLMM Regression</span>
+                            <span class="skill-tag">Data Pipeline Engineering</span>
+                            <span class="skill-tag">WebSocket Development</span>
+                            <span class="skill-tag">API Integration</span>
+                            <span class="skill-tag">Statistical Analysis</span>
+                            <span class="skill-tag">Time Series Analysis</span>
+                            <span class="skill-tag">Data Preprocessing</span>
+                            <span class="skill-tag">Algorithm Design</span>
+                            <span class="skill-tag">OOP</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="category-title">Finance & Trading</div>
+                        <div class="skills-grid">
+                            <span class="skill-tag">Quantitative Analysis</span>
+                            <span class="skill-tag">Algorithmic Trading</span>
+                            <span class="skill-tag">Fixed Income Markets</span>
+                            <span class="skill-tag">Options Greeks</span>
+                            <span class="skill-tag">DCF Modeling</span>
+                            <span class="skill-tag">Valuation Analysis</span>
+                            <span class="skill-tag">Risk Modeling</span>
+                            <span class="skill-tag">Market Microstructure</span>
+                            <span class="skill-tag">Derivatives</span>
+                            <span class="skill-tag">Portfolio Analysis</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="category-title">Languages</div>
+                        <div class="skills-grid">
+                            <span class="skill-tag">English (Native)</span>
+                            <span class="skill-tag">Mandarin (Fluent)</span>
+                            <span class="skill-tag">French (Business Proficient)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Achievements & Certifications Section -->
+            <section class="content-section" id="achievements-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <h2 class="section-title">&gt; Achievements & Interests</h2>
+                </div>
+                <div class="section-content">
+                    <div class="achievement-card">
+                        <div class="achievement-title">Academic Excellence</div>
+                        <div class="achievement-description">
+                            Maintained a 4.0/4.0 GPA while pursuing a rigorous Computational Finance degree at Carnegie Mellon University, one of the top-ranked programs globally
+                        </div>
+                    </div>
+
+                    <div class="achievement-card">
+                        <div class="achievement-title">Research Publication</div>
+                        <div class="achievement-description">
+                            Co-authored research paper submitted to Speech Prosody 2026 on real-time sarcasm processing using eye-tracking, demonstrating strong analytical and research capabilities
+                        </div>
+                    </div>
+
+                    <div class="achievement-card">
+                        <div class="achievement-title">Investment Performance</div>
+                        <div class="achievement-description">
+                            $RIVN long thesis achieved 40% returns since pitch, demonstrating strong fundamental analysis and market timing skills
+                        </div>
+                    </div>
+
+                    <div class="achievement-card">
+                        <div class="achievement-title">Product Development</div>
+                        <div class="achievement-description">
+                            Developed OpenGym web application serving 1000+ users with real-time gym occupancy predictions using advanced machine learning models
+                        </div>
+                    </div>
+
+                    <div class="achievement-card">
+                        <div class="achievement-title">Competitive Gaming</div>
+                        <div class="achievement-description">
+                            Ranked in top 2% of Tetris players globally, demonstrating exceptional pattern recognition and strategic thinking abilities
+                        </div>
+                    </div>
+
+                    <div class="achievement-card">
+                        <div class="achievement-title">Athletic Excellence</div>
+                        <div class="achievement-description">
+                            Competitive snowboarder and marathon runner, balancing athletic pursuits with rigorous academic and professional commitments
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // ============================================
+        // SIDEBAR FUNCTIONALITY
+        // ============================================
+        (function() {
+            const sideNav = document.getElementById('sideNav');
+            const toggleBtn = document.getElementById('toggleBtn');
+            const mainContent = document.querySelector('.main-content');
+
+            // Load saved sidebar state
+            const savedState = localStorage.getItem('sidebarCollapsed');
+            if (savedState === 'true') {
+                sideNav.classList.add('collapsed');
+                document.body.classList.add('sidebar-collapsed');
+            }
+
+            // Toggle sidebar
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', () => {
+                    sideNav.classList.toggle('collapsed');
+                    document.body.classList.toggle('sidebar-collapsed');
+                    
+                    const isCollapsed = sideNav.classList.contains('collapsed');
+                    localStorage.setItem('sidebarCollapsed', isCollapsed);
+                    
+                    if (window.innerWidth <= 768) {
+                        sideNav.classList.toggle('mobile-open');
+                    }
+                });
+            }
+
+            // Set active tab
+            const currentPage = document.body.getAttribute('data-current-page');
+            if (currentPage) {
+                document.querySelectorAll('.nav-tab').forEach(tab => {
+                    tab.classList.remove('active');
+                    if (tab.getAttribute('data-page') === currentPage) {
+                        tab.classList.add('active');
+                    }
+                });
+            }
+
+            // Handle resize
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    if (window.innerWidth > 768) {
+                        sideNav.classList.remove('mobile-open');
+                    }
+                }, 250);
+            });
+
+            // Close mobile sidebar on outside click
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    if (sideNav.classList.contains('mobile-open') && 
+                        !sideNav.contains(e.target) && 
+                        !toggleBtn.contains(e.target)) {
+                        sideNav.classList.remove('mobile-open');
+                    }
+                }
+            });
+        })();
+
+        // ============================================
+        // GLITCH EFFECT SYSTEM
+        // ============================================
+        const glitchOverlay = document.getElementById('glitchOverlay');
+
+        function triggerGlitch() {
+            glitchOverlay.classList.add('active');
+            setTimeout(() => {
+                glitchOverlay.classList.remove('active');
+            }, 300);
+
+            // Occasionally glitch section titles
+            if (Math.random() < 0.3) {
+                const titles = document.querySelectorAll('.section-title');
+                const randomTitle = titles[Math.floor(Math.random() * titles.length)];
+                
+                randomTitle.style.transform = `translate(${Math.random() * 6 - 3}px, ${Math.random() * 6 - 3}px)`;
+                randomTitle.style.textShadow = `
+                    ${Math.random() * 4 - 2}px 0 red,
+                    ${Math.random() * 4 - 2}px 0 cyan
+                `;
+                
+                setTimeout(() => {
+                    randomTitle.style.transform = 'translate(0, 0)';
+                    randomTitle.style.textShadow = 'none';
+                }, 100);
+            }
+        }
+
+        // Schedule random glitches
+        function scheduleNextGlitch() {
+            const delay = Math.random() * 5000 + 3000;
+            setTimeout(() => {
+                triggerGlitch();
+                scheduleNextGlitch();
+            }, delay);
+        }
+
+        setTimeout(() => {
+            scheduleNextGlitch();
+        }, 2000);
+
+        // Add hover glitches on cards
+        document.querySelectorAll('.experience-card, .skill-tag, .achievement-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                if (Math.random() < 0.2) {
+                    triggerGlitch();
+                }
+            });
+        });
+
+        // Scan line glitch
+        const scanlines = document.querySelector('.scanlines');
+        setInterval(() => {
+            if (Math.random() < 0.15) {
+                scanlines.style.opacity = Math.random() * 0.5 + 0.1;
+                setTimeout(() => {
+                    scanlines.style.opacity = '0.3';
+                }, 100);
+            }
+        }, 1500);
+
+        // Animate experience cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        entry.target.style.transition = 'all 0.6s ease';
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, 100);
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.experience-card, .achievement-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

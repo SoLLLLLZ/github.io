@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thomas Zhao - Cyberpunk Portfolio">
+    <title>Thomas Zhao | Cyberpunk Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0f;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .cyberpunk-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            background-image: url('cyberpunkBg.png');  
+            background-size: cover;                      
+            background-position: center;                 
+            background-repeat: no-repeat;                
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* Side Navigation Panel */
+        .side-nav {
+            width: 280px;
+            background: rgba(17, 17, 22, 0.9);
+            border-right: 2px solid rgba(0, 255, 255, 0.3);
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        /* Nav Tab */
+        .nav-tab {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 18px 25px;
+            background: rgba(22, 22, 31, 0.8);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #888;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-tab:hover::before {
+            left: 100%;
+        }
+
+        .nav-tab:hover {
+            border-color: #0ff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            transform: translateX(5px);
+        }
+
+        .nav-tab.active {
+            border-color: #0ff;
+            background: rgba(0, 255, 255, 0.1);
+            color: #0ff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .nav-tab.active .nav-icon {
+            background: linear-gradient(135deg, #0ff, #f0f);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+        }
+
+        /* Nav Icon */
+        .nav-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .nav-text {
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            position: relative;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Profile Image Container */
+        .profile-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            z-index: 1;
+        }
+
+        /* Animated Border Ring */
+        .border-ring {
+            position: absolute;
+            bottom: 0;
+            left: 110%;
+            transform: translateX(-50%);
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            background: linear-gradient(#0a0a0f, #0a0a0f) padding-box,
+                        linear-gradient(45deg, #0ff, #f0f, #0ff) border-box;
+            animation: rotate 4s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes rotate {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        /* Glow Effect */
+        .glow-ring {
+            position: absolute;
+            bottom: 0;
+            left: 110%;
+            transform: translateX(-50%);
+            width: 440px;
+            height: 440px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.3), transparent 70%);
+            filter: blur(20px);
+            animation: pulse 2s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.5;
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1.05);
+            }
+        }
+
+        /* Profile Image */
+        .profile-image {
+            position: absolute;
+            bottom: -10%;
+            left: 110%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            border-radius: 0;
+            overflow: visible;
+            border: none;
+            box-shadow: none;
+            z-index: 2;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;  /* Change from cover to contain */
+            display: block;
+            filter: drop-shadow(0 0 40px rgba(0, 255, 255, 0.6));
+        }
+
+        /* Name Display */
+        .name-display {
+            margin-bottom: 20px;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            width: 100%;
+            text-align: center;
+        }
+
+        .name-title {
+            font-size: 72px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b00, #ffaa00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(255, 107, 0, 0.5);
+            animation: glowText 2s ease-in-out infinite;
+        }
+
+        @keyframes glowText {
+            0%, 100% {
+                filter: brightness(1);
+            }
+            50% {
+                filter: brightness(1.3);
+            }
+        }
+
+        .name-subtitle {
+            font-size: 24px;
+            color: #0ff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Loading Progress */
+        .loading-container {
+            position: fixed;
+            top: 70%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .loading-ring {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+        }
+
+        .loading-circle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .loading-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: #0ff;
+            border-right-color: #f0f;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-percent {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            font-weight: bold;
+            color: #0ff;
+        }
+
+        .loading-text {
+            font-size: 24px;
+            color: #ffffff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        /* Data Feed (right side scrolling text) */
+        .data-feed {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 280px;
+            height: 600px;
+            overflow: hidden;
+            background: rgba(17, 17, 22, 0.7);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 20px;
+            font-size: 11px;
+            color: #888;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+        }
+
+        .data-feed-content {
+            animation: scrollUp 20s linear infinite;
+        }
+
+        @keyframes scrollUp {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        /* Scan Lines Effect */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 255, 255, 0) 50%,
+                rgba(0, 255, 255, 0.02) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.3;
+        }
+
+        /* Corner Decorations */
+        .corner-decoration {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(0, 255, 255, 0.5);
+            z-index: 1000;
+        }
+
+        .corner-decoration.top-left {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-decoration.top-right {
+            top: 20px;
+            right: 20px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-decoration.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-decoration.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .data-feed {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .side-nav {
+                width: 100%;
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 20px 10px;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+
+            .nav-tab {
+                min-width: 150px;
+            }
+
+            .profile-container {
+                width: 300px;
+                height: 300px;
+                bottom: 10px;
+            }
+
+            .border-ring {
+                width: 280px;
+                height: 280px;
+            }
+
+            .glow-ring {
+                width: 300px;
+                height: 300px;
+            }
+
+            .profile-image {
+                width: 300px;
+                height: 300px;
+            }
+
+            .name-display {
+                top: 15%;
+            }
+
+            .loading-container {
+                top: 35%;
+            }
+
+            .name-title {
+                font-size: 48px;
+            }
+
+            .name-subtitle {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Grid Background -->
+    <div class="cyberpunk-background"></div>
+
+    <!-- Scanlines Effect -->
+    <div class="scanlines"></div>
+
+    <!-- Corner Decorations -->
+    <div class="corner-decoration top-left"></div>
+    <div class="corner-decoration top-right"></div>
+    <div class="corner-decoration bottom-left"></div>
+    <div class="corner-decoration bottom-right"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Side Navigation -->
+        <nav class="side-nav">
+            <a href="#home" class="nav-tab active">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                </div>
+                <span class="nav-text">Home</span>
+            </a>
+
+            <a href="about.html" class="nav-tab">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <span class="nav-text">About Me</span>
+            </a>
+
+            <a href="education.html" class="nav-tab">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                    </svg>
+                </div>
+                <span class="nav-text">Education</span>
+            </a>
+
+            <a href="experience.html" class="nav-tab">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+                    </svg>
+                </div>
+                <span class="nav-text">Experience</span>
+            </a>
+
+            <a href="projects.html" class="nav-tab">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                    </svg>
+                </div>
+                <span class="nav-text">Projects</span>
+            </a>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="hero-section">
+                <!-- Profile Image Section -->
+                <div class="profile-container">
+                    <div class="glow-ring"></div>
+                    <div class="border-ring"></div>
+                    <div class="profile-image">
+                        <img src="profile.png" alt="Thomas Zhao">
+                    </div>
+                </div>
+
+                <!-- Name Display -->
+                <div class="name-display">
+                    <h1 class="name-title">Thomas Zhao</h1>
+                    <p class="name-subtitle">Software Engineer</p>
+                </div>
+
+                <!-- Loading/Progress Indicator -->
+                <div class="loading-container">
+                    <div class="loading-ring">
+                        <div class="loading-circle"></div>
+                        <div class="loading-progress"></div>
+                        <div class="loading-percent">99%</div>
+                    </div>
+                    <p class="loading-text">Loading...</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Data Feed (Right Side) -->
+        <aside class="data-feed">
+            <div class="data-feed-content">
+                <p>NEO-TOKYO DATA BREACH</p>
+                <p>C01G1.MCL1.T1C5.OMUOUM</p>
+                <p>BRUNT DOME TERRORISM OCLINT AY POORLCGS</p>
+                <br>
+                <p>BUSKTOM L1 CIIUS RIPEES 21025</p>
+                <p>GANLOD9ZD AGOCS PROORS 61 PNEOKIRGT</p>
+                <br>
+                <p>QUANTRWEG MNSED AT PREMTIUS</p>
+                <p>MOVUYS AO CNAAIRNEOINEE</p>
+                <p>M08 G EAOM.</p>
+                <br>
+                <p>RIROITOM FI ROORE. ATITE TIEUS</p>
+                <p>ORBWI ANTORG SEU YE ERARION</p>
+                <p>PONG: 0131</p>
+                <br>
+                <p>SYNFTHOME RUE RIAGES 2026</p>
+                <p>AANC1IOKD OAJIILIJE SGTACAAIT</p>
+                <p>POTTEEIGG</p>
+                <br>
+                <p>MESTGOD AME SYIE IS BAACH</p>
+                <p>ROARIECWICR RISES 2026G</p>
+                <p>CRIBIE MILGREO MESCANLO AAINE</p>
+                <p>PNE TEO MGDOG NEE PO LAAWGT PAOK</p>
+                <br>
+                <p>LIOA/ OUTC Q/CATBL BROUIR</p>
+                <p>CIOQ9ES.INST AON RE NILO NONE</p>
+                <p>DOOPRESIITDOOQRL.</p>
+                <br>
+                <!-- Duplicate content for seamless scroll -->
+                <p>NEO-TOKYO DATA BREACH</p>
+                <p>C01G1.MCL1.T1C5.OMUOUM</p>
+                <p>BRUNT DOME TERRORISM OCLINT AY POORLCGS</p>
+                <br>
+                <p>BUSKTOM L1 CIIUS RIPEES 21025</p>
+                <p>GANLOD9ZD AGOCS PROORS 61 PNEOKIRGT</p>
+                <br>
+                <p>QUANTRWEG MNSED AT PREMTIUS</p>
+                <p>MOVUYS AO CNAAIRNEOINEE</p>
+                <p>M08 G EAOM.</p>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // Add smooth scrolling for navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                }
+                
+                // Update active state
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Simulate loading progress
+        let percent = 0;
+        const percentElement = document.querySelector('.loading-percent');
+        
+        const loadingInterval = setInterval(() => {
+            if (percent < 99) {
+                percent += Math.random() * 5;
+                if (percent > 99) percent = 99;
+                percentElement.textContent = Math.floor(percent) + '%';
+            }
+        }, 100);
+
+        // Complete loading after 3 seconds
+        setTimeout(() => {
+            clearInterval(loadingInterval);
+            percentElement.textContent = '100%';
+        }, 3000);
+    </script>
+</body>
+</html>
