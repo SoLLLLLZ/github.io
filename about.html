@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="About Thomas Zhao - Get to know me">
     <title>Thomas Zhao | About Me</title>
+    <link rel="stylesheet" href="sidebar.css">
     <style>
         * {
             margin: 0;
@@ -71,143 +72,6 @@
             z-index: 2;
             min-height: 100vh;
             display: flex;
-        }
-
-        /* Side Navigation Panel */
-        .side-nav {
-            width: 280px;
-            background: rgba(17, 17, 22, 0.95);
-            border-right: 2px solid rgba(0, 255, 255, 0.3);
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
-            transition: transform 0.3s ease, width 0.3s ease;
-            position: relative;
-        }
-
-        .side-nav.collapsed {
-            width: 80px;
-        }
-
-        .side-nav.collapsed .nav-text {
-            opacity: 0;
-            width: 0;
-        }
-
-        .side-nav.collapsed .toggle-btn {
-            transform: rotate(180deg);
-        }
-
-        /* Toggle Button */
-        .toggle-btn {
-            position: absolute;
-            top: 20px;
-            right: -15px;
-            width: 30px;
-            height: 30px;
-            background: rgba(17, 17, 22, 0.95);
-            border: 2px solid #0ff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-
-        .toggle-btn:hover {
-            background: rgba(0, 255, 255, 0.2);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
-        }
-
-        .toggle-btn svg {
-            width: 16px;
-            height: 16px;
-            fill: #0ff;
-            transition: transform 0.3s ease;
-        }
-
-        /* Nav Tab */
-        .nav-tab {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding: 18px 25px;
-            background: rgba(22, 22, 31, 0.8);
-            border: 2px solid rgba(0, 255, 255, 0.3);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: #888;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-tab::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .nav-tab:hover::before {
-            left: 100%;
-        }
-
-        .nav-tab:hover {
-            border-color: #0ff;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-            transform: translateX(5px);
-        }
-
-        .nav-tab.active {
-            border-color: #0ff;
-            background: rgba(0, 255, 255, 0.15);
-            color: #0ff;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-        }
-
-        .nav-tab.active .nav-icon {
-            background: linear-gradient(135deg, #0ff, #f0f);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
-        }
-
-        /* Nav Icon */
-        .nav-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid rgba(0, 255, 255, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-        }
-
-        .nav-icon svg {
-            width: 24px;
-            height: 24px;
-            fill: currentColor;
-        }
-
-        .nav-text {
-            font-size: 18px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            white-space: nowrap;
-            transition: opacity 0.3s ease, width 0.3s ease;
         }
 
         /* Main Content Area */
@@ -986,27 +850,8 @@
             </style>
         </main>
     </div>
-
+    <script src="sidebar.js"></script>
     <script>
-        // Sidebar Toggle Functionality
-        const sideNav = document.getElementById('sideNav');
-        const toggleBtn = document.getElementById('toggleBtn');
-
-        toggleBtn.addEventListener('click', () => {
-            sideNav.classList.toggle('collapsed');
-            // On mobile, toggle mobile-open class instead
-            if (window.innerWidth <= 768) {
-                sideNav.classList.toggle('mobile-open');
-            }
-        });
-
-        // Update active state for navigation
-        document.querySelectorAll('.nav-tab').forEach(tab => {
-            tab.addEventListener('click', function(e) {
-                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
 
         // Glitch Effect System
         const glitchOverlay = document.getElementById('glitchOverlay');

@@ -1,0 +1,311 @@
+/* Side Navigation Panel */
+.side-nav {
+    width: 280px;
+    background: rgba(17, 17, 22, 0.95);
+    border-right: 2px solid rgba(0, 255, 255, 0.3);
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 100;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Collapsed State - Icon Only */
+.side-nav {
+    width: 280px;
+    background: rgba(17, 17, 22, 0.95);
+    border-right: 2px solid rgba(0, 255, 255, 0.3);
+    padding: 120px 20px 40px 20px; /* Changed from 40px to 120px top padding */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 100;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Collapsed State - Icon Only */
+.side-nav.collapsed {
+    width: 90px;
+    padding: 120px 0 40px 0; /* Match the 120px top padding, no side padding */
+    align-items: center; /* Center all children horizontally */
+}
+
+.side-nav.collapsed .nav-text {
+    opacity: 0;
+    width: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, width 0.2s ease;
+}
+
+.side-nav.collapsed .nav-tab {
+    width: 70px; /* Fixed width for perfect centering */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    background: transparent;
+    border: none;
+    gap: 0; /* Remove gap to center icon perfectly */
+    margin: 0 auto; /* Center the nav-tab within the sidebar */
+}
+
+.side-nav.collapsed .nav-tab:hover {
+    background: rgba(0, 255, 255, 0.05);
+    transform: scale(1.1); /* Scale instead of translateX */
+    box-shadow: none;
+}
+
+.side-nav.collapsed .nav-tab::before {
+    display: none;
+}
+
+.side-nav.collapsed .nav-icon {
+    margin: 0;
+}
+
+/* Nav Text - Smooth fade in/out */
+.nav-text {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: opacity 0.3s ease 0.1s, width 0.3s ease;
+    overflow: hidden;
+}
+
+/* Nav Tab - Enhanced for collapsed state */
+.nav-tab {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 25px;
+    background: rgba(22, 22, 31, 0.8);
+    border: 2px solid rgba(0, 255, 255, 0.3);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    color: #888;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-tab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.nav-tab:hover::before {
+    left: 100%;
+}
+
+.nav-tab:hover {
+    border-color: #0ff;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    transform: translateX(5px);
+}
+
+.nav-tab.active {
+    border-color: #0ff;
+    background: rgba(0, 255, 255, 0.15);
+    color: #0ff;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.nav-tab.active .nav-icon {
+    background: linear-gradient(135deg, #0ff, #f0f);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
+
+/* Nav Icon - Enhanced for glitch effects */
+.nav-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    position: relative;
+}
+
+.nav-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    transition: fill 0.3s ease;
+}
+
+/* Icon hover effects - Enhanced */
+.nav-tab:hover .nav-icon {
+    border-color: #0ff;
+    background: rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+}
+
+/* Main Content Area - Adjust for collapsed sidebar */
+.main-content {
+    margin-left: 280px;
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.sidebar-collapsed .main-content {
+    margin-left: 90px;
+}
+
+/* Don't need toggle button anymore */
+.toggle-btn {
+    display: none;
+}
+
+/* Scrollbar styling for sidebar */
+.side-nav::-webkit-scrollbar {
+    width: 6px;
+}
+
+.side-nav::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.side-nav::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.side-nav::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 255, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .side-nav {
+        transform: translateX(-100%);
+        width: 280px !important;
+    }
+
+    .side-nav.mobile-open {
+        transform: translateX(0);
+    }
+    
+    .side-nav.collapsed {
+        transform: translateX(-100%);
+    }
+
+    .toggle-btn {
+        left: 100%;
+        right: auto;
+    }
+
+    .main-content {
+        padding: 40px 20px;
+        margin-left: 0 !important;
+    }
+
+    body.sidebar-collapsed .main-content {
+        margin-left: 0;
+    }
+
+    /* Disable hover expansion on mobile */
+    .side-nav.collapsed .nav-text {
+        opacity: 1;
+        width: auto;
+    }
+}
+
+/* Additional Animation Classes */
+@keyframes iconGlitch {
+    0%, 100% {
+        transform: translate(0, 0);
+        filter: hue-rotate(0deg);
+    }
+    20% {
+        transform: translate(-3px, 2px);
+        filter: hue-rotate(90deg);
+    }
+    40% {
+        transform: translate(3px, -2px);
+        filter: hue-rotate(180deg);
+    }
+    60% {
+        transform: translate(-2px, -3px);
+        filter: hue-rotate(270deg);
+    }
+    80% {
+        transform: translate(2px, 3px);
+        filter: hue-rotate(360deg);
+    }
+}
+
+/* Pulse effect for active nav item */
+.nav-tab.active .nav-icon {
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(0, 255, 255, 1), 
+                    0 0 40px rgba(0, 255, 255, 0.6);
+    }
+}
+
+/* Sidebar glow effect on hover */
+.side-nav::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -2px;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0, 255, 255, 0.5),
+        transparent
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.side-nav:hover::after {
+    opacity: 1;
+    animation: borderGlow 2s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
