@@ -22,7 +22,7 @@
         lineWidth: 0.000001,              // Width of the glitch line
         glitchIntensity: 1.2,
         glitchDuration: 1000,
-        maxTrailPoints: 200,
+        maxTrailPoints: 100,
         trailSpacing: 8,            // Smooth spacing between points
         magnificationStrength: 1.1, // How much to magnify (1.5 = 150%)
     };
