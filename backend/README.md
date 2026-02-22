@@ -7,7 +7,6 @@ GET /api/news
 - Parameters: q (optional search string), limit (default 5, max 5)
 - Returns a list of articles with id, title, description, url, source, and published date
 - Filters out low-quality sources, job postings, and duplicate articles
-- Fetches 10 articles and returns 5 random ones for variety on refresh
 
 GET /api/summary
 - Generates an AI summary for a given article
