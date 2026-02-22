@@ -40,7 +40,7 @@ Cursor and Claude to debug and did some manual customization of elements.  -->
             height: 100%;
             z-index: 0;
             overflow: hidden;
-            background-image: url('cyberpunkBg.png');  
+            background-image: url('assets/cyberpunkBg.png');  
             background-size: cover;                      
             background-position: center;                 
             background-repeat: no-repeat;                
@@ -320,27 +320,142 @@ Cursor and Claude to debug and did some manual customization of elements.  -->
             transform: translateY(-50%);
             width: 280px;
             height: 600px;
-            overflow: hidden;
             background: rgba(17, 17, 22, 0.7);
             border: 1px solid rgba(0, 255, 255, 0.3);
-            padding: 20px;
+            padding: 0;
             font-size: 11px;
             color: #888;
             font-family: 'Courier New', monospace;
             line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
         }
 
-        .data-feed-content {
-            animation: scrollUp 20s linear infinite;
+        .data-feed-refresh {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 255, 255, 0.05);
+            border: none;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            color: #0ff;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s;
         }
 
-        @keyframes scrollUp {
-            0% {
-                transform: translateY(0);
-            }
-            100% {
-                transform: translateY(-50%);
-            }
+        .data-feed-refresh:hover {
+            background: rgba(0, 255, 255, 0.15);
+        }
+
+        .data-feed-refresh:disabled {
+            color: #444;
+            cursor: not-allowed;
+        }
+
+        .data-feed-list {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 10px;
+        }
+
+        .data-feed-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .data-feed-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .data-feed-list::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 255, 0.3);
+        }
+
+        .data-feed-item {
+            display: block;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            cursor: pointer;
+            text-decoration: none;
+            color: #888;
+            transition: color 0.2s;
+        }
+
+        .data-feed-item:hover {
+            color: #0ff;
+        }
+
+        .data-feed-item-source {
+            font-size: 9px;
+            color: rgba(0, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .data-feed-item-title {
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .data-feed-status {
+            padding: 20px 10px;
+            color: #444;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        /* Preview Card */
+        .news-preview-card {
+            position: fixed;
+            right: 320px;
+            width: 300px;
+            background: rgba(17, 17, 22, 0.95);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            color: #aaa;
+            line-height: 1.6;
+            box-shadow: -4px 0 20px rgba(0, 255, 255, 0.1);
+            display: none;
+            z-index: 200;
+            pointer-events: none;
+        }
+
+        .news-preview-card.visible {
+            display: block;
+        }
+
+        .news-preview-summary {
+            margin-bottom: 12px;
+            color: #ccc;
+        }
+
+        .news-preview-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .news-tag {
+            padding: 2px 8px;
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            color: #0ff;
+            font-size: 9px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .news-preview-loading {
+            color: #444;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         /* Scan Lines Effect */
@@ -539,7 +654,7 @@ Cursor and Claude to debug and did some manual customization of elements.  -->
                     <div class="glow-ring"></div>
                     <div class="border-ring"></div>
                     <div class="profile-image">
-                        <img src="profile.png" alt="Thomas Zhao">
+                        <img src="assets/profile.png" alt="Thomas Zhao">
                     </div>
                 </div>
 
@@ -563,48 +678,16 @@ Cursor and Claude to debug and did some manual customization of elements.  -->
 
         <!-- Data Feed (Right Side) -->
         <aside class="data-feed">
-            <div class="data-feed-content">
-                <p>NEO-TOKYO DATA BREACH</p>
-                <p>C01G1.MCL1.T1C5.OMUOUM</p>
-                <p>BRUNT DOME TERRORISM OCLINT AY POORLCGS</p>
-                <br>
-                <p>BUSKTOM L1 CIIUS RIPEES 21025</p>
-                <p>GANLOD9ZD AGOCS PROORS 61 PNEOKIRGT</p>
-                <br>
-                <p>QUANTRWEG MNSED AT PREMTIUS</p>
-                <p>MOVUYS AO CNAAIRNEOINEE</p>
-                <p>M08 G EAOM.</p>
-                <br>
-                <p>RIROITOM FI ROORE. ATITE TIEUS</p>
-                <p>ORBWI ANTORG SEU YE ERARION</p>
-                <p>PONG: 0131</p>
-                <br>
-                <p>SYNFTHOME RUE RIAGES 2026</p>
-                <p>AANC1IOKD OAJIILIJE SGTACAAIT</p>
-                <p>POTTEEIGG</p>
-                <br>
-                <p>MESTGOD AME SYIE IS BAACH</p>
-                <p>ROARIECWICR RISES 2026G</p>
-                <p>CRIBIE MILGREO MESCANLO AAINE</p>
-                <p>PNE TEO MGDOG NEE PO LAAWGT PAOK</p>
-                <br>
-                <p>LIOA/ OUTC Q/CATBL BROUIR</p>
-                <p>CIOQ9ES.INST AON RE NILO NONE</p>
-                <p>DOOPRESIITDOOQRL.</p>
-                <br>
-                <!-- Duplicate content for seamless scroll -->
-                <p>NEO-TOKYO DATA BREACH</p>
-                <p>C01G1.MCL1.T1C5.OMUOUM</p>
-                <p>BRUNT DOME TERRORISM OCLINT AY POORLCGS</p>
-                <br>
-                <p>BUSKTOM L1 CIIUS RIPEES 21025</p>
-                <p>GANLOD9ZD AGOCS PROORS 61 PNEOKIRGT</p>
-                <br>
-                <p>QUANTRWEG MNSED AT PREMTIUS</p>
-                <p>MOVUYS AO CNAAIRNEOINEE</p>
-                <p>M08 G EAOM.</p>
+            <button class="data-feed-refresh" id="feedRefresh">⟳ Refresh Feed</button>
+            <div class="data-feed-list" id="feedList">
+                <div class="data-feed-status">Loading...</div>
             </div>
         </aside>
+
+        <!-- Preview Card (outside aside, fixed position) -->
+        <div class="news-preview-card" id="newsPreviewCard">
+            <div class="news-preview-loading">Loading...</div>
+        </div>
     </div>
 
     <script src="sidebar.js"></script>
@@ -629,5 +712,6 @@ Cursor and Claude to debug and did some manual customization of elements.  -->
             percentElement.textContent = '100%';
         }, 3000);
     </script> -->
+    <script src="newsFeed.js"></script>
 <body>
 </html>
